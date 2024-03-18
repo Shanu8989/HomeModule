@@ -34,9 +34,17 @@ class HomeFragment : Fragment() {
 
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                val intent = Intent(activity, LoginActivity::class.java)
+                /*val intent = Intent(activity, LoginActivity::class.java)
                 startActivity(intent)
-                activity?.finish()
+                activity?.finish()*/
+                val intent = Intent(
+                    requireActivity(),
+                    Class.forName("com.shanu.nmsuperapp.presentation.activity.LoginActivity")
+                ).apply {
+                    startActivity(this)
+                }.also {
+                    activity?.finish()
+                }
             }
         })
     }
