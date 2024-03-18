@@ -1,6 +1,5 @@
 package com.shanu.homemodule
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,11 +13,16 @@ import com.shanu.homemodule.databinding.FragmentHomeBinding
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeFragment : Fragment() {
+class HomeFragment() : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-
     private val binding get() = _binding!!
+
+    private lateinit var dataCallback: () -> Unit
+
+    fun registerDataCallback(callback: () -> Unit) {
+        dataCallback = callback
+    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -36,7 +40,7 @@ class HomeFragment : Fragment() {
             override fun handleOnBackPressed() {
                 /*val intent = Intent(activity, LoginActivity::class.java)
                 startActivity(intent)
-                activity?.finish()*/
+                activity?.finish()
                 Intent(
                     requireActivity(),
                     Class.forName("com.shanu.nmsuperapp.presentation.activity.LoginActivity")
@@ -44,7 +48,8 @@ class HomeFragment : Fragment() {
                     startActivity(this)
                 }.also {
                     activity?.finish()
-                }
+                }*/
+                dataCallback.invoke()
             }
         })
     }
