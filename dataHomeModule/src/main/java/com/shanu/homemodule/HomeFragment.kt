@@ -18,10 +18,10 @@ class HomeFragment() : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var dataCallback: () -> Unit
+    private lateinit var homeModuleDataCallback: () -> Unit
 
-    fun registerDataCallback(callback: () -> Unit) {
-        dataCallback = callback
+    fun registerHomeModuleDataCallback(dataCallback: () -> Unit) {
+        homeModuleDataCallback = dataCallback
     }
 
     override fun onDestroy() {
@@ -49,7 +49,7 @@ class HomeFragment() : Fragment() {
                 }.also {
                     activity?.finish()
                 }*/
-                dataCallback.invoke()
+                homeModuleDataCallback.invoke()
             }
         })
     }
